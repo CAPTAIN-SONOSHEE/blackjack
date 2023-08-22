@@ -8,7 +8,10 @@ while not (launch == "y" or launch == "n"):
 
 if launch == "y":
 
-  cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+  cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10,
+           11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10,
+           11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10,
+           11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
   remaining_cards = []
   user_cards = []
   computer_cards = []
@@ -40,7 +43,7 @@ if launch == "y":
 
     if another_card == "y":
       user_cards.append(int(random.choice(cards)))
-      #remove_cards(user_cards)
+      remove_cards(user_cards)
       if current_score(user_cards) > 21:
         if 11 in user_cards:
           user_cards[user_cards.index(11)] = 1
@@ -56,7 +59,7 @@ if launch == "y":
   def computer_turn():
     while current_score(computer_cards) < 17: 
      computer_cards.append(int(random.choice(cards)))
-     #remove_cards(computer_cards)
+     remove_cards(computer_cards)
      if 11 in computer_cards:
        computer_cards[computer_cards.index(11)] = 1
       
@@ -84,19 +87,16 @@ if launch == "y":
     print(cards)  
 
 
-  #def remove_cards(cards_list):
-   # print(cards_list)
-    #for card in cards_list:
-     # if card in cards:
-      # cards.remove(card)
-    #print(cards)   
+  def remove_cards(cards_list):
+       cards.remove(cards_list[-1])
 
   def blackjack():
     user_cards.append(int(random.choice(cards)))
+    remove_cards(user_cards)
     user_cards.append(int(random.choice(cards)))
-    #remove_cards(user_cards)
+    remove_cards(user_cards)
     computer_cards.append(int(random.choice(cards)))
-    #remove_cards(computer_cards)
+    remove_cards(computer_cards)
     user_turn()
     
   print(logo)
