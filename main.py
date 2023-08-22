@@ -12,7 +12,6 @@ if launch == "y":
            11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10,
            11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10,
            11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
-  remaining_cards = []
   user_cards = []
   computer_cards = []
   user_score = 0
@@ -42,8 +41,7 @@ if launch == "y":
       another_card = input("You enter an invalid input. Type 'y' or 'n': ").lower()
 
     if another_card == "y":
-      user_cards.append(int(random.choice(cards)))
-      remove_cards(user_cards)
+      deal(user_cards)
       if current_score(user_cards) > 21:
         if 11 in user_cards:
           user_cards[user_cards.index(11)] = 1
@@ -58,8 +56,7 @@ if launch == "y":
   
   def computer_turn():
     while current_score(computer_cards) < 17: 
-     computer_cards.append(int(random.choice(cards)))
-     remove_cards(computer_cards)
+     deal(computer_cards)
      if 11 in computer_cards:
        computer_cards[computer_cards.index(11)] = 1
       
@@ -69,9 +66,7 @@ if launch == "y":
     end_score(user_score,computer_score)
 
   def current_score(score_list):
-    actual_score = 0
-    for score in score_list:
-      actual_score += score
+    actual_score = sum(score_list)
     return actual_score
 
   def end_score(user_end_score, computer_end_score):
@@ -86,17 +81,18 @@ if launch == "y":
       print("Draw")
     print(cards)  
 
-
+  def deal(cards_list):
+    """Give a random card and remove it from the deck """
+    cards_list.append(int(random.choice(cards)))
+    remove_cards(cards_list)
+    
   def remove_cards(cards_list):
        cards.remove(cards_list[-1])
 
   def blackjack():
-    user_cards.append(int(random.choice(cards)))
-    remove_cards(user_cards)
-    user_cards.append(int(random.choice(cards)))
-    remove_cards(user_cards)
-    computer_cards.append(int(random.choice(cards)))
-    remove_cards(computer_cards)
+    deal(user_cards)
+    deal(user_cards)
+    deal(computer_cards)
     user_turn()
     
   print(logo)
